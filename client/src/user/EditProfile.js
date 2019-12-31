@@ -59,7 +59,8 @@ class EditProfile extends Component {
       password: "",
       redirectToProfile: false,
       error: "",
-      about: ""
+      about: "",
+      photo: ''
     };
     this.match = match;
   }
@@ -80,35 +81,36 @@ class EditProfile extends Component {
           id: data._id,
           name: data.name,
           email: data.email,
-          about: data.about
+          about: data.about,
+          photo: data.photo
         });
       }
     });
   };
   clickSubmit = () => {
     const jwt = auth.isAuthenticated();
-    const user = {
-      name: this.state.name || undefined,
-      about: this.state.about || undefined,
-      email: this.state.email || undefined,
-      password: this.state.password || undefined
-    };
+    // const user = {
+    //   name: this.state.name || undefined,
+    //   about: this.state.about || undefined,
+    //   email: this.state.email || undefined,
+    //   password: this.state.password || undefined
+    // };
     update(
       {
         userId: this.match.params.userId
-      },
-      {
+      },{
         t: jwt.token
       },
-      user
+      this.userData
     ).then(data => {
       if (data.error) {
         this.setState({ error: data.error });
       } else {
-        this.setState({ userId: data._id, redirectToProfile: true });
+        this.setState({ userId: data._id,  redirectToProfile: true });
       }
     });
   };
+
   handleChange = name => event => {
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     this.userData.set(name, value);

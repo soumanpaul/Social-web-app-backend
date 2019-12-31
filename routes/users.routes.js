@@ -18,12 +18,19 @@ router.route("/photo/:userId").get(userCtrl.photo, userCtrl.defaultPhoto);
 router.route("/defaultphoto").get(userCtrl.defaultPhoto);
 router.param("userId", userCtrl.userByID);
 
-// //
-// router.route('/follow')
-// .put(authCtrl.requireSignin, userCtrl.addFollowing, userCtrl.addFollower)
-// router.route('/unfollow')
-// .put(authCtrl.requireSignin, userCtrl.removeFollowing, userCtrl.removeFollower)
-// router.route('/findpeople/:userId')
-// .get(authCtrl.requireSignin, userCtrl.findPeople)
+router
+  .route("/follow")
+  .put(authCtrl.requireSignin, userCtrl.addFollowing, userCtrl.addFollower);
+router
+  .route("/unfollow")
+  .put(
+    authCtrl.requireSignin,
+    userCtrl.removeFollowing,
+    userCtrl.removeFollower
+  );
+
+router
+  .route("/findpeople/:userId")
+  .get(authCtrl.requireSignin, userCtrl.findPeople);
 
 module.exports = router;

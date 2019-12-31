@@ -3,8 +3,7 @@ const _ = require("lodash");
 const errorHandler = require("../helpers/dbErrorHandler");
 const formidable = require("formidable");
 const fs = require("fs");
-// const  profileImage = require('../images/seashell.jpg');
-
+// const  profileImage = require('../public/images/seashell.jpg');
 
 const create = (req, res, next) => {
   const user = new User(req.body);
@@ -32,14 +31,17 @@ const list = (req, res) => {
 };
 
 const userByID = (req, res, next, id) => {
-  User.findById(id).exec((err, user) => {
-    if (err || !user)
-      return res.status("400").json({
-        error: "User not found"
-      });
-    req.profile = user;
-    next();
-  });
+  User.findById(id)
+    .populate("following", "_id name")
+    .populate("followers", "_id name")
+    .exec((err, user) => {
+      if (err || !user)
+        return res.status("400").json({
+          error: "User not found"
+        });
+      req.profile = user;
+      next();
+    });
 };
 
 const read = (req, res) => {
@@ -58,9 +60,13 @@ const update = (req, res, next) => {
       });
     }
     let user = req.profile;
-    user = _.extend(user, req.body);
+    user = _.extend(user, fields);
     user.updated = Date.now();
-    user.save(err => {
+    if (files.photo) {
+      user.photo.data = fs.readFileSync(files.photo.path);
+      user.photo.contentType = files.photo.type;
+    }
+    user.save((err, result) => {
       if (err) {
         return res.status(400).json({
           error: errorHandler.getErrorMessage(err)
@@ -94,7 +100,106 @@ const photo = (req, res, next) => {
   }
   next();
 };
+
 const defaultPhoto = (req, res) => {
-  return res.sendFile(process.cwd()+profileImage)
-}
-module.exports = { defaultPhoto, create, userByID, read, list, remove, update };
+  // return res.sendFile(process.cwd()+profileImage)
+  return res.sendFile(process.cwd());
+};
+
+const addFollowing = (req, res, next) => {
+  User.findByIdAndUpdate(
+    req.body.userId,
+    { $push: { following: req.body.followId } },
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        });
+      }
+      next();
+    }
+  );
+};
+
+const addFollower = (req, res) => {
+  User.findByIdAndUpdate(
+    req.body.followId,
+    { $push: { followers: req.body.userId } },
+    { new: true }
+  )
+    .populate("following", "_id name")
+    .populate("followers", "_id name")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        });
+      }
+      result.hashed_password = undefined;
+      result.salt = undefined;
+      res.json(result);
+    });
+};
+
+const removeFollowing = (req, res, next) => {
+  User.findByIdAndUpdate(
+    req.body.userId,
+    { $pull: { following: req.body.unfollowId } },
+    (err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        });
+      }
+      next();
+    }
+  );
+};
+const removeFollower = (req, res) => {
+  User.findByIdAndUpdate(
+    req.body.unfollowId,
+    { $pull: { followers: req.body.userId } },
+    { new: true }
+  )
+    .populate("following", "_id name")
+    .populate("followers", "_id name")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(400).json({
+          error: errorHandler.getErrorMessage(err)
+        });
+      }
+      result.hashed_password = undefined;
+      result.salt = undefined;
+      res.json(result);
+    });
+};
+
+const findPeople = (req, res) => {
+  let following = req.profile.following;
+  following.push(req.profile._id);
+  User.find({ _id: { $nin: following } }, (err, users) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      });
+    }
+    res.json(users);
+  }).select("name");
+};
+
+module.exports = {
+  defaultPhoto,
+  photo,
+  create,
+  userByID,
+  read,
+  list,
+  remove,
+  update,
+  addFollower,
+  addFollowing,
+  removeFollower,
+  removeFollowing,
+  findPeople
+};

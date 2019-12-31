@@ -23,6 +23,8 @@ var mongoose = require("mongoose");
 var indexRouter = require("./routes/index.routes");
 var usersRouter = require("./routes/users.routes");
 const authRouter = require("./routes/auth.routes");
+const postsRouter = require("./routes/post.routes");
+
 
 //
 const mongoUrl = "mongodb://localhost:27017/mern-skill";
@@ -40,6 +42,10 @@ var app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
+var publicDir = require('path').join(__dirname,'/public');
+app.use(express.static(publicDir));
+
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -52,6 +58,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/posts", postsRouter);
+
 
 
 

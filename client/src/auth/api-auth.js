@@ -15,7 +15,7 @@ const signin = user => {
 };
 
 const signout = () => {
-  return fetch("/auth/signout/", {
+  return fetch("/api/v1/auth/signout/", {
     method: "GET"
   })
     .then(response => {
