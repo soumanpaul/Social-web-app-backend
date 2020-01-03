@@ -20,30 +20,30 @@ const styles = theme => ({
   card: {
     maxWidth:600,
     margin: 'auto',
-    marginBottom: theme.spacing.unit*3,
+    marginBottom: theme.spacing(3),
     backgroundColor: 'rgba(0, 0, 0, 0.06)'
   },
   cardContent: {
     backgroundColor: 'white',
-    padding: `${theme.spacing.unit*2}px 0px`
+    padding: `${theme.spacing(2)}px 0px`
   },
   cardHeader: {
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit
+    paddingTop: theme.spacing(),
+    paddingBottom: theme.spacing()
   },
   text: {
-    margin: theme.spacing.unit*2
+    margin: theme.spacing(2)
   },
   photo: {
     textAlign: 'center',
     backgroundColor: '#f2f5f4',
-    padding:theme.spacing.unit
+    padding:theme.spacing()
   },
   media: {
     height: 200
   },
   button: {
-   margin: theme.spacing.unit,
+   margin: theme.spacing(),
   }
 })
 
@@ -57,7 +57,7 @@ class Post extends Component {
   componentDidMount = () => {
     this.setState({like:this.checkLike(this.props.post.likes), likes: this.props.post.likes.length, comments: this.props.post.comments})
   }
-  componentWillReceiveProps = (props) => {
+  UNSAFE_componentWillReceiveProps = (props) => {
     this.setState({like:this.checkLike(props.post.likes), likes: props.post.likes.length, comments: props.post.comments})
   }
 

@@ -17,7 +17,7 @@ class ProfileTabs extends Component {
     posts: []
   }
 
-  componentWillReceiveProps = (props) => {
+  UNSAFE_componentWillReceiveProps = (props) => {
     this.setState({tab:0})
   }
   handleTabChange = (event, value) => {
@@ -33,7 +33,7 @@ class ProfileTabs extends Component {
             onChange={this.handleTabChange}
             indicatorColor="primary"
             textColor="primary"
-            fullWidth
+            fullwidth="true"
           >
             <Tab label="Posts" />
             <Tab label="Following" />

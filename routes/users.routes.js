@@ -4,6 +4,9 @@ const authCtrl = require("../controllers/auth.controller");
 
 const router = express.Router();
 
+router.route('/follow').post(userCtrl.addFollowing, userCtrl.addFollower);
+
+
 router
   .route("/")
   .get(userCtrl.list)
@@ -17,10 +20,8 @@ router
 router.route("/photo/:userId").get(userCtrl.photo, userCtrl.defaultPhoto);
 router.route("/defaultphoto").get(userCtrl.defaultPhoto);
 router.param("userId", userCtrl.userByID);
+// authCtrl.requireSignin, userCtrl.addFollowing, userCtrl.addFollower
 
-router
-  .route("/follow")
-  .put(authCtrl.requireSignin, userCtrl.addFollowing, userCtrl.addFollower);
 router
   .route("/unfollow")
   .put(

@@ -73,7 +73,7 @@ exports.remove = (params, credentials) => {
 };
 
 exports.follow = (params, credentials, followId) => {
-  return fetch("/api/v1/users/follow/", {
+  return fetch("/api/v1/users/follow", {
     method: "PUT",
     headers: {
       Accept: "application/json",

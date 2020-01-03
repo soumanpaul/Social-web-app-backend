@@ -16,19 +16,19 @@ import ViewIcon from '@material-ui/icons/Visibility'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
-    padding: theme.spacing.unit,
+    padding: theme.spacing(),
     margin: 0
   }),
   title: {
-    margin: `${theme.spacing.unit * 3}px ${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    margin: `${theme.spacing(3) }px ${theme.spacing()}px ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
     fontSize: '1em'
   },
   avatar: {
-    marginRight: theme.spacing.unit * 1
+    marginRight: theme.spacing(1)
   },
   follow: {
-    right: theme.spacing.unit * 2
+    right: theme.spacing(2)
   },
   snack: {
     color: theme.palette.protectedTitle
@@ -96,7 +96,7 @@ class FindPeople extends Component {
                         <ViewIcon/>
                       </IconButton>
                     </Link>
-                    <Button aria-label="Follow" variant="raised" color="primary" onClick={this.clickFollow.bind(this, item, i)}>
+                    <Button aria-label="Follow" variant="contained" color="primary" onClick={this.clickFollow.bind(this, item, i)}>
                       Follow
                     </Button>
                   </ListItemSecondaryAction>

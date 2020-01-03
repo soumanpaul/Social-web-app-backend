@@ -6,6 +6,7 @@ import {unfollow, follow} from './api-user.js'
 
 class FollowProfileButton extends Component {
   followClick = () => {
+    console.log("clicked follow...")
     this.props.onButtonClick(follow);
   };
   unfollowClick = () => {
@@ -16,14 +17,14 @@ class FollowProfileButton extends Component {
       <div>
         {this.props.following ? (
           <Button
-            variant="raised"
+            variant="contained"
             color="secondary"
             onClick={this.unfollowClick}
           >
             Unfollow
           </Button>
         ) : (
-          <Button variant="raised" color="primary" onClick={this.followClick}>
+          <Button variant="contained" color="primary" onClick={this.followClick()}>
             Follow
           </Button>
         )}

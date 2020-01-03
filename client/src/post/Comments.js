@@ -11,8 +11,8 @@ import {Link} from 'react-router-dom'
 
 const styles = theme => ({
   cardHeader: {
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit
+    paddingTop: theme.spacing(),
+    paddingBottom: theme.spacing()
   },
   smallAvatar: {
     width: 25,
@@ -23,8 +23,8 @@ const styles = theme => ({
   },
   commentText: {
     backgroundColor: 'white',
-    padding: theme.spacing.unit,
-    margin: `2px ${theme.spacing.unit*2}px 2px 2px`
+    padding: theme.spacing(),
+    margin: `2px ${theme.spacing(2)}px 2px 2px`
   },
   commentDate: {
     display: 'block',

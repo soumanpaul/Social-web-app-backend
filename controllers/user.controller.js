@@ -107,6 +107,8 @@ const defaultPhoto = (req, res) => {
 };
 
 const addFollowing = (req, res, next) => {
+  console.log(req.body)
+  console.log("Following added...")
   User.findByIdAndUpdate(
     req.body.userId,
     { $push: { following: req.body.followId } },

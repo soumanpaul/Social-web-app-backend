@@ -19,10 +19,10 @@ const styles = theme => ({
   card: {
     maxWidth: 600,
     margin: 'auto',
-    marginTop: theme.spacing.unit * 5
+    marginTop: theme.spacing(5)
   },
   title: {
-    padding:`${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit * 2}px`,
+    padding:`${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
     color: theme.palette.text.secondary
   },
   media: {
@@ -41,7 +41,7 @@ class Home extends Component {
       this.setState({defaultPage: true})
     }
   }
-  componentWillReceiveProps = () => {
+  UNSAFE_componentWillReceiveProps = () => {
     this.init()
   }
   componentDidMount = () => {
@@ -52,7 +52,7 @@ class Home extends Component {
     return (
       <div className={classes.root}>
         {this.state.defaultPage &&
-          <Grid container spacing={24}>
+          <Grid container spacing={10}>
             <Grid item xs={12}>
               <Card className={classes.card}>
                 <Typography type="headline" component="h2" className={classes.title}>
@@ -70,10 +70,10 @@ class Home extends Component {
         }
         {!this.state.defaultPage &&
           <Grid container  spacing={10}>
-            <Grid item xs={8} sm={7} justify="center" alignItems="flex-start" spacing={3}>
+            <Grid item xs={8} sm={7}  >
               <Newsfeed/>
             </Grid>
-            <Grid item xs={6} sm={5}   justify="flex-end" alignItems="flex-end" spacing={3}>
+            <Grid item xs={6} sm={5}  >
               <FindPeople/>
             </Grid>
           </Grid>

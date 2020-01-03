@@ -18,24 +18,24 @@ const styles = theme => ({
     maxWidth: 600,
     margin: "auto",
     textAlign: "center",
-    marginTop: theme.spacing.unit * 5,
-    paddingBottom: theme.spacing.unit * 2
+    marginTop: theme.spacing( 5),
+    paddingBottom: theme.spacing( 2)
   },
   title: {
-    margin: theme.spacing.unit * 2,
+    margin: theme.spacing(2),
     color: theme.palette.protectedTitle
   },
   error: {
     verticalAlign: "middle"
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
+    marginLeft: theme.spacing(),
+    marginRight: theme.spacing(),
     width: 300
   },
   submit: {
     margin: "auto",
-    marginBottom: theme.spacing.unit * 2
+    marginBottom: theme.spacing( 2)
   },
   bigAvatar: {
     width: 60,

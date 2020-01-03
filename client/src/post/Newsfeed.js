@@ -1,22 +1,22 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {withStyles} from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import Typography from '@material-ui/core/Typography'
-import Divider from '@material-ui/core/Divider'
-import auth from '../auth/auth-helper'
-import PostList from './PostList'
-import {listNewsFeed} from './api.post.js'
-import NewPost from './NewPost'
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {withStyles} from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import auth from '../auth/auth-helper';
+import PostList from './PostList';
+import {listNewsFeed} from './api.post.js';
+import NewPost from './NewPost';
 
 const styles = theme => ({
   card: {
     margin: 'auto',
     paddingTop: 0,
-    paddingBottom: theme.spacing.unit*3
+    paddingBottom: theme.spacing(3)
   },
   title: {
-    padding:`${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit * 2}px`,
+    padding:`${theme.spacing ( 3)}px ${theme.spacing (2.5)}px ${theme.spacing(2)}px`,
     color: theme.palette.openTitle,
     fontSize: '1em'
   },

@@ -14,7 +14,7 @@ import { GridListTile } from '@material-ui/core/'
 
 const styles = theme => ({
   root: {
-    paddingTop: theme.spacing.unit*2,
+    paddingTop: theme.spacing(2),
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
