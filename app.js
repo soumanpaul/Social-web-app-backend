@@ -26,8 +26,9 @@ const authRouter = require("./routes/auth.routes");
 const postsRouter = require("./routes/post.routes");
 
 
-//
-const mongoUrl = "mongodb://localhost:27017/mern-skill";
+const mongoUrl = "mongodb+srv://Sam1729Paul:Sam1729Paul@cluster0-qhlvw.mongodb.net/mern-social?retryWrites=true&w=majority";
+
+// const mongoUrl = "mongodb://localhost:27017/mern-skill";
 mongoose.connect(
   mongoUrl,
   { useUnifiedTopology: true, useNewUrlParser: true },
@@ -55,7 +56,7 @@ app.use(helmet());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
+app.use("/api/v1/index", indexRouter);
 app.use("/api/v1/users", usersRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/posts", postsRouter);
