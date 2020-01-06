@@ -1,3 +1,22 @@
-# MERN-social  https://mernsocial24.herokuapp.com/
-basic social media application inspired by Twitter and Facebook. This social media platform will implement simple features such as post sharing, liking and commenting, following friends, and an aggregated news feed.
+# MERN-social REST API
 
+
+## Technologies
+* Nodejs
+* Expressjs
+* Mongodb
+* Mongoose
+
+
+
+
+
+## Demo
+
+Live project
+
+Client React web App version [here]( http://mernsocial24client.herokuapp.com/)
+
+REST API Documentatioin [here](https://mernsocial24.herokuapp.com/)
+
+Extensive Postman version of API documentation with examples [here](https://documenter.getpostman.com/view/5731747/SWLe6nhT?version=latest)
